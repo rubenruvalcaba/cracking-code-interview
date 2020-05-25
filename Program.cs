@@ -6,7 +6,7 @@ namespace cracking_code_interview
     {
         static void Main(string[] args)
         {
-            chapter1.exercises.Run();
+            chapter2.Run();
         }
     }
 }
