@@ -21,12 +21,73 @@ namespace chapter1
             Console.WriteLine($"Urilify 'a b c    ' -> {urlify("a b c    ")}");
             Console.WriteLine($"Urilify 'this is an awesome test        ' -> {urlify("this is an awesome test        ")}");
             Console.WriteLine($"Urilify 'NoSpacesBetween' -> {urlify("NoSpacesBetween")}");
-*/
+
 
             Console.WriteLine($"'taco cat' is palindrome: {IsPalindrome("taco cat")}");
             Console.WriteLine($"'abba' is palindrome: {IsPalindrome("abba")}");
             Console.WriteLine($"'abdba' is palindrome: {IsPalindrome("abdba")}");
             Console.WriteLine($"'not a palindrome' is palindrome: {IsPalindrome("not a palindrome")}");
+*/
+
+            Console.WriteLine($"Compress aabccccaaa: {Compress("aabccccaaa")}");
+            Console.WriteLine($"Compress abc: {Compress("abc")}");
+
+            Console.WriteLine($"DeCompress 2a1b4c3a: {DeCompress("2a1b4c3a")}");
+            Console.WriteLine($"DeCompress abc: {DeCompress("abc")}");
+
+        }
+
+        private static string DeCompress(string text)
+        {
+            // Validate input
+            if (string.IsNullOrEmpty(text))
+                return "";
+
+            string currentNumber = "";
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < text.Length; i++)
+                if (char.IsDigit(text[i]))
+                    currentNumber += text[i];
+                else
+                {
+                    if (currentNumber == "")
+                        currentNumber = "1";
+                    for (int j = 0; j < int.Parse(currentNumber); j++)
+                        sb.Append(text[i]);
+                    currentNumber = "";
+                }
+
+            return sb.ToString();
+
+        }
+
+        private static string Compress(string text)
+        {
+            // Validate input
+            if (string.IsNullOrEmpty(text))
+                return string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+            char currentChar = '\0';
+            int currentCount = 0;
+            for (int i = 0; i < text.Length; i++)
+                if (text[i] != currentChar)
+                {
+                    if (currentCount > 0)
+                        sb.Append($"{currentCount}{currentChar}");
+                    currentChar = text[i];
+                    currentCount = 1;
+                }
+                else
+                    currentCount++;
+
+            if (currentCount > 0)
+                sb.Append($"{currentCount}{currentChar}");
+
+            if (sb.Length < text.Length)
+                return sb.ToString();
+            else
+                return text;
 
         }
 
