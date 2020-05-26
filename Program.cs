@@ -6,7 +6,7 @@ namespace cracking_code_interview
     {
         static void Main(string[] args)
         {
-            Siva.Run();
+            Sort.Run();
         }
     }
 }
